@@ -1,15 +1,20 @@
 Watching for file changes with StatReloader
 Not Found: /api/health/
-[17/Aug/2025 05:32:05] "GET /api/health/ HTTP/1.1" 404 6527
-[17/Aug/2025 05:32:58] "OPTIONS /api/token/ HTTP/1.1" 200 0
-[17/Aug/2025 05:32:58] "POST /api/token/ HTTP/1.1" 200 489
-[17/Aug/2025 05:32:58] "OPTIONS /api/user/ HTTP/1.1" 200 0
-[17/Aug/2025 05:32:58] "GET /api/user/ HTTP/1.1" 200 96
-[17/Aug/2025 05:32:58] "OPTIONS /api/dashboard/ HTTP/1.1" 200 0
-[17/Aug/2025 05:32:58] "OPTIONS /api/dashboard/ HTTP/1.1" 200 0
-[17/Aug/2025 05:32:58] "GET /api/dashboard/ HTTP/1.1" 200 413
-[17/Aug/2025 05:32:58] "GET /api/dashboard/ HTTP/1.1" 200 413
-[17/Aug/2025 05:32:58] "OPTIONS /api/tax-savings/ HTTP/1.1" 200 0
-[17/Aug/2025 05:32:58] "OPTIONS /api/tax-savings/ HTTP/1.1" 200 0
-[17/Aug/2025 05:33:04] "GET /api/tax-savings/ HTTP/1.1" 200 2612
-[17/Aug/2025 05:33:04] "GET /api/tax-savings/ HTTP/1.1" 200 2650
+[17/Aug/2025 08:30:51] "GET /api/health/ HTTP/1.1" 404 6527
+[17/Aug/2025 08:32:22] "OPTIONS /api/user/ HTTP/1.1" 200 0
+[17/Aug/2025 08:32:22] "OPTIONS /api/user/ HTTP/1.1" 200 0
+Unauthorized: /api/user/
+Unauthorized: /api/user/
+[17/Aug/2025 08:32:22] "GET /api/user/ HTTP/1.1" 401 172
+[17/Aug/2025 08:32:22] "GET /api/user/ HTTP/1.1" 401 172
+[17/Aug/2025 08:32:29] "OPTIONS /api/token/ HTTP/1.1" 200 0
+[17/Aug/2025 08:32:29] "POST /api/token/ HTTP/1.1" 200 489
+[17/Aug/2025 08:32:29] "GET /api/user/ HTTP/1.1" 200 96
+[17/Aug/2025 08:32:29] "OPTIONS /api/dashboard/ HTTP/1.1" 200 0
+[17/Aug/2025 08:32:29] "OPTIONS /api/dashboard/ HTTP/1.1" 200 0
+[17/Aug/2025 08:32:29] "GET /api/dashboard/ HTTP/1.1" 200 413
+[17/Aug/2025 08:32:29] "GET /api/dashboard/ HTTP/1.1" 200 413
+[17/Aug/2025 08:32:29] "OPTIONS /api/tax-savings/ HTTP/1.1" 200 0
+[17/Aug/2025 08:32:29] "OPTIONS /api/tax-savings/ HTTP/1.1" 200 0
+[17/Aug/2025 08:32:35] "GET /api/tax-savings/ HTTP/1.1" 200 2659
+[17/Aug/2025 08:32:36] "GET /api/tax-savings/ HTTP/1.1" 200 2850

@@ -21,6 +21,15 @@ from .serializers import (
 )
 from .ai_service import ai_service
 
+def health_check(request):
+    """Health check endpoint for monitoring"""
+    return JsonResponse({
+        'status': 'healthy',
+        'timestamp': datetime.now().isoformat(),
+        'service': 'Finwise Backend API',
+        'version': '1.0.0'
+    })
+
 def generate_tax_tips(profile):
     tips = []
     

@@ -4,10 +4,13 @@ from .views import (
     CustomTokenObtainPairView, ProfileView, DashboardView, TaxSavingsView, 
     ChatbotView, BenefitsView, ReportsView, UserRegistrationView, 
     UserDetailView, ChangePasswordView, WisdomLibraryView, BookListView,
-    BookDetailView, UserReadingHistoryView, UserPreferencesView
+    BookDetailView, UserReadingHistoryView, UserPreferencesView, health_check
 )
 
 urlpatterns = [
+    # Health check endpoint
+    path('health/', health_check, name='health_check'),
+    
     # Authentication endpoints
     path('register/', UserRegistrationView.as_view(), name='user_register'),
     path('token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
