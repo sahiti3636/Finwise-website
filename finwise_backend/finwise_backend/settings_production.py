@@ -1,11 +1,10 @@
 """
-Production settings for FinWise on Google Cloud Platform
+Production settings for FinWise Backend
 """
 
-import os
-from pathlib import Path
 from .settings import *
 import dj_database_url
+import os
 
 # Production settings
 DEBUG = False
@@ -57,40 +56,4 @@ LOGGING = {
             'propagate': False,
         },
     },
-}
-
-# Cache configuration (using local memory for now, can be upgraded to Redis)
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake',
-    }
-}
-
-# Email configuration (configure with your email service)
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_PORT = int(os.environ.get('EMAIL_PORT', '587'))
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
-
-# Gemini AI configuration
-GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', '')
-
-# Performance optimizations
-CONN_MAX_AGE = 60
-OPTIMIZE_TABLE_ROW_COUNT = True
-
-# Google Cloud specific optimizations
-if os.environ.get('GAE_ENV'):
-    # App Engine specific settings
-    INSTALLED_APPS += ['django_appengine']
-    
-    # Use App Engine's built-in caching
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-            'LOCATION': '127.0.0.1:11211',
-        }
-    } 
+} 
