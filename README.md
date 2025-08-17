@@ -206,32 +206,5 @@ finwise_project/
 - **Error Handling**: Graceful error management
 - **Logging**: Production-ready logging system
 
-## Contributing
 
-1. **Fork the repository**
-2. **Create feature branch**: `git checkout -b feature/amazing-feature`
-3. **Commit changes**: `git commit -m 'Add amazing feature'`
-4. **Push to branch**: `git push origin feature/amazing-feature`
-5. **Open Pull Request**
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Support
-
-- **Documentation**: Check this README and inline code comments
-- **Issues**: Report bugs via GitHub Issues
-- **Discussions**: Use GitHub Discussions for questions
-- **Deployment**: Follow the deployment guide above
-
-## Acknowledgments
-
-- **Google Gemini AI** for intelligent financial recommendations
-- **Django & React** communities for excellent frameworks
-- **Render, Vercel, Neon** for reliable hosting services
-- **Open source contributors** for building amazing tools
-
----
-
-**Ready to deploy?** Follow the deployment steps above and get your Finwise application running in production!
