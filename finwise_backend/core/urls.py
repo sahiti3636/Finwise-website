@@ -8,8 +8,9 @@ from .views import (
 )
 
 urlpatterns = [
-    # Health check endpoint
+    # Health check endpoint (handle both with and without trailing slash)
     path('health/', health_check, name='health_check'),
+    path('health', health_check, name='health_check_no_slash'),
     
     # Authentication endpoints
     path('register/', UserRegistrationView.as_view(), name='user_register'),
