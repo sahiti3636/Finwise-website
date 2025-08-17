@@ -1,20 +1,20 @@
-# 🚀 Finwise - AI-Powered Financial Advisor
+# Finwise - AI-Powered Financial Advisor
 
-> **Status: 🟢 Production Deployed** | **Backend**: Render | **Frontend**: Vercel | **Database**: Neon PostgreSQL
+> **Status: Production Deployed** | **Backend**: Render | **Frontend**: Vercel | **Database**: Neon PostgreSQL
 
 A comprehensive financial advisory platform that combines AI-powered insights with personalized financial planning tools. Built with Django, React, and enhanced with Java microservices.
 
-## ✨ Features
+## Features
 
-- **🤖 AI-Powered Recommendations**: Google Gemini AI integration for personalized financial advice
-- **📊 Financial Dashboard**: Comprehensive overview of income, savings, and investments
-- **💰 Tax Optimization**: Smart tax-saving strategies and deductions
-- **📚 Wisdom Library**: Curated financial books and resources
-- **💬 AI Chatbot**: Interactive financial guidance
-- **📈 Investment Tracking**: Monitor and analyze investment performance
-- **🎯 Goal Setting**: Personalized financial goal planning
+- **AI-Powered Recommendations**: Google Gemini AI integration for personalized financial advice
+- **Financial Dashboard**: Comprehensive overview of income, savings, and investments
+- **Tax Optimization**: Smart tax-saving strategies and deductions
+- **Wisdom Library**: Curated financial books and resources
+- **AI Chatbot**: Interactive financial guidance
+- **Investment Tracking**: Monitor and analyze investment performance
+- **Goal Setting**: Personalized financial goal planning
 
-## 🏗️ Architecture
+## Architecture
 
 ### Backend (Django + Python)
 - **Framework**: Django 5 + Django REST Framework
@@ -35,22 +35,22 @@ A comprehensive financial advisory platform that combines AI-powered insights wi
 - **Features**: Multi-source book cover fetching with fallbacks
 - **Purpose**: Demonstrates code conversion capabilities and Java integration
 
-## 🚀 Deployment Status
+## Deployment Status
 
-### ✅ Production Environment
+### Production Environment
 - **Backend API**: [https://finwise-api.onrender.com](https://finwise-api.onrender.com)
 - **Frontend**: [https://finwise-website.vercel.app](https://finwise-website.vercel.app)
 - **Database**: Neon PostgreSQL (Serverless)
 - **Health Check**: `/api/health/` endpoint for monitoring
 
-### 🔧 Deployment Stack
+### Deployment Stack
 - **Backend**: Render (Web Service)
 - **Frontend**: Vercel (Automatic deployments)
 - **Database**: Neon (Serverless PostgreSQL)
 - **CDN**: Vercel Edge Network
 - **SSL**: Automatic HTTPS provisioning
 
-## 🛠️ Quick Start
+## Quick Start
 
 ### Prerequisites
 - Python 3.11+
@@ -94,7 +94,7 @@ npm run dev
 npm run build
 ```
 
-## 🔑 Environment Variables
+## Environment Variables
 
 ### Backend (.env)
 ```env
@@ -111,7 +111,7 @@ CORS_ALLOWED_ORIGINS=http://localhost:3000
 VITE_API_BASE_URL=https://your-backend-url.com/api
 ```
 
-## 🌐 API Endpoints
+## API Endpoints
 
 ### Authentication
 - `POST /api/register/` - User registration
@@ -129,7 +129,7 @@ VITE_API_BASE_URL=https://your-backend-url.com/api
 ### Health & Monitoring
 - `GET /api/health/` - Service health check
 
-## 🎯 Java Integration
+## Java Integration
 
 The project includes a **Java microservice** (`BookCoverService`) that demonstrates:
 
@@ -144,7 +144,7 @@ The project includes a **Java microservice** (`BookCoverService`) that demonstra
 - **Error Handling**: Comprehensive exception management
 - **Performance**: Optimized HTTP requests and response parsing
 
-## 📊 Project Structure
+## Project Structure
 
 ```
 finwise_project/
@@ -161,7 +161,7 @@ finwise_project/
 └── README.md               # This file
 ```
 
-## 🚀 Production Deployment
+## Production Deployment
 
 ### Backend (Render)
 1. **Connect GitHub repository**
@@ -182,7 +182,7 @@ finwise_project/
 2. **Copy connection string**
 3. **Set as `DATABASE_URL`** in backend environment
 
-## 🔒 Security Features
+## Security Features
 
 - **JWT Authentication**: Secure token-based authentication
 - **CORS Protection**: Configured for production domains
@@ -190,7 +190,7 @@ finwise_project/
 - **HTTPS Enforcement**: Automatic SSL in production
 - **Input Validation**: Comprehensive data validation
 
-## 📈 Performance & Scalability
+## Performance & Scalability
 
 - **CDN Distribution**: Vercel Edge Network
 - **Database Optimization**: Connection pooling and health checks
@@ -198,7 +198,7 @@ finwise_project/
 - **API Rate Limiting**: Respectful API usage
 - **Caching Strategy**: Optimized response times
 
-## 🧪 Testing & Quality
+## Testing & Quality
 
 - **TypeScript**: Full type safety in frontend
 - **ESLint**: Code quality enforcement
@@ -206,7 +206,7 @@ finwise_project/
 - **Error Handling**: Graceful error management
 - **Logging**: Production-ready logging system
 
-## 🤝 Contributing
+## Contributing
 
 1. **Fork the repository**
 2. **Create feature branch**: `git checkout -b feature/amazing-feature`
@@ -214,18 +214,18 @@ finwise_project/
 4. **Push to branch**: `git push origin feature/amazing-feature`
 5. **Open Pull Request**
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Support
+## Support
 
 - **Documentation**: Check this README and inline code comments
 - **Issues**: Report bugs via GitHub Issues
 - **Discussions**: Use GitHub Discussions for questions
 - **Deployment**: Follow the deployment guide above
 
-## 🎉 Acknowledgments
+## Acknowledgments
 
 - **Google Gemini AI** for intelligent financial recommendations
 - **Django & React** communities for excellent frameworks
@@ -234,4 +234,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**🚀 Ready to deploy?** Follow the deployment steps above and get your Finwise application running in production!
+**Ready to deploy?** Follow the deployment steps above and get your Finwise application running in production!
