@@ -1,242 +1,303 @@
 #!/bin/bash
-# FinWise Local Development Setup Script
 
-set -e
+# FinWise Local Development Setup Script
+# This script sets up and runs the FinWise application locally
+
+echo -e "${BLUE}FinWise Local Development Setup${NC}"
+echo "====================================="
+echo ""
 
 # Colors for output
-RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
+RED='\033[0;31m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}🚀 FinWise Local Development Setup${NC}"
-echo "======================================"
+# Function to print colored output
+print_success() {
+    echo -e "${GREEN}$1${NC}"
+}
 
-# Function to check if a command exists
-command_exists() {
-    command -v "$1" >/dev/null 2>&1
+print_warning() {
+    echo -e "${YELLOW}$1${NC}"
+}
+
+print_error() {
+    echo -e "${RED}$1${NC}"
+}
+
+print_info() {
+    echo -e "${BLUE}$1${NC}"
 }
 
 # Function to check prerequisites
 check_prerequisites() {
-    echo -e "${YELLOW}🔍 Checking prerequisites...${NC}"
+    echo -e "${YELLOW}Checking prerequisites...${NC}"
     
     # Check Python
-    if ! command_exists python3; then
-        echo -e "${RED}❌ Python 3 not found. Please install Python 3.8+${NC}"
+    if ! command -v python3 &> /dev/null; then
+        print_error "Python 3 is not installed"
+        echo "Please install Python 3.8+ first"
         exit 1
     fi
     
     # Check Node.js
-    if ! command_exists node; then
-        echo -e "${RED}❌ Node.js not found. Please install Node.js 16+${NC}"
-        echo "Install with: brew install node"
+    if ! command -v node &> /dev/null; then
+        print_error "Node.js is not installed"
+        echo "Please install Node.js 16+ first"
         exit 1
     fi
     
     # Check npm
-    if ! command_exists npm; then
-        echo -e "${RED}❌ npm not found. Please install npm${NC}"
+    if ! command -v npm &> /dev/null; then
+        print_error "npm is not installed"
+        echo "Please install npm first"
         exit 1
     fi
     
-    echo -e "${GREEN}✅ Prerequisites check completed${NC}"
+    # Check if we're in the right directory
+    if [ ! -f "finwise_backend/manage.py" ]; then
+        print_error "Please run this script from the FinWise project root directory"
+        exit 1
+    fi
+    
+    print_success "Prerequisites check completed"
 }
 
 # Function to setup backend
 setup_backend() {
-    echo -e "${YELLOW}🐍 Setting up Python backend...${NC}"
+    echo ""
+    print_info "Setting up backend..."
     
     cd finwise_backend
     
-    # Check if virtual environment exists
+    # Create virtual environment if it doesn't exist
     if [ ! -d "venv" ]; then
         echo "Creating virtual environment..."
         python3 -m venv venv
     fi
     
     # Activate virtual environment
-    echo "Activating virtual environment..."
     source venv/bin/activate
     
-    # Install requirements
+    # Install dependencies
     echo "Installing Python dependencies..."
-    pip install --upgrade pip
     pip install -r requirements.txt
     
-    # Check if .env file exists, if not create one
+    # Create .env file if it doesn't exist
     if [ ! -f ".env" ]; then
         echo "Creating .env file..."
         cat > .env << 'EOF'
-DEBUG=True
+# Django Settings
 SECRET_KEY=your-secret-key-here-change-this-in-production
+DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
 CORS_ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
 
-# Database (using SQLite for local development)
-DATABASE_URL=sqlite:///db.sqlite3
-
-# Gemini API (you'll need to add your own key)
+# Gemini AI Settings
 GEMINI_API_KEY=your-gemini-api-key-here
 
-# Email settings (optional for local development)
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_HOST_USER=your-email@gmail.com
-EMAIL_HOST_PASSWORD=your-app-password
-EMAIL_USE_TLS=True
+# Database Settings
+DATABASE_URL=sqlite:///db.sqlite3
 EOF
-        echo -e "${YELLOW}⚠️  Please update the .env file with your Gemini API key${NC}"
+        
+        print_warning "Please update the .env file with your Gemini API key"
+        echo "Get your key from: https://makersuite.google.com/app/apikey"
     fi
     
     # Run migrations
     echo "Running database migrations..."
     python manage.py migrate
     
-    # Create superuser if it doesn't exist
-    echo "Checking for superuser..."
-    if ! python manage.py shell -c "from django.contrib.auth.models import User; print('Superuser exists' if User.objects.filter(is_superuser=True).exists() else 'No superuser')" 2>/dev/null | grep -q "Superuser exists"; then
-        echo -e "${YELLOW}Creating superuser...${NC}"
-        echo "Please enter superuser details:"
-        python manage.py createsuperuser
-    fi
-    
-    # Collect static files
-    echo "Collecting static files..."
-    python manage.py collectstatic --noinput
-    
     cd ..
-    
-    echo -e "${GREEN}✅ Backend setup completed${NC}"
+    print_success "Backend setup completed"
 }
 
 # Function to setup frontend
 setup_frontend() {
-    echo -e "${YELLOW}⚛️  Setting up React frontend...${NC}"
+    echo ""
+    print_info "Setting up frontend..."
     
     cd project_frontend/projectv2_v
     
-    # Check if node_modules exists
-    if [ ! -d "node_modules" ]; then
-        echo "Installing Node.js dependencies..."
-        npm install
+    # Install dependencies
+    echo "Installing Node.js dependencies..."
+    npm install
+    
+    # Create .env file if it doesn't exist
+    if [ ! -f ".env" ]; then
+        echo "Creating .env file..."
+        echo "VITE_API_URL=http://127.0.0.1:8000" > .env
     fi
     
     cd ../..
-    
-    echo -e "${GREEN}✅ Frontend setup completed${NC}"
+    print_success "Frontend setup completed"
 }
 
 # Function to start backend
 start_backend() {
-    echo -e "${YELLOW}🚀 Starting Django backend...${NC}"
+    echo ""
+    print_info "Starting Django backend..."
     
     cd finwise_backend
-    
-    # Activate virtual environment
     source venv/bin/activate
     
-    # Start Django development server
-    echo "Starting Django server on http://127.0.0.1:8000"
-    echo "Press Ctrl+C to stop the backend server"
-    echo ""
-    
-    python manage.py runserver 127.0.0.1:8000 &
+    # Start backend in background
+    nohup python manage.py runserver 127.0.0.1:8000 > ../backend.log 2>&1 &
     BACKEND_PID=$!
+    
+    # Save PID
+    echo $BACKEND_PID > ../backend.pid
+    
+    # Wait for backend to start
+    echo "Waiting for backend to start..."
+    for i in {1..30}; do
+        if curl -s http://127.0.0.1:8000/api/health/ > /dev/null 2>&1; then
+            break
+        fi
+        sleep 1
+    done
     
     cd ..
     
-    # Wait a moment for backend to start
-    sleep 3
-    
-    echo -e "${GREEN}✅ Backend started successfully${NC}"
+    if [ -f "backend.pid" ]; then
+        print_success "Backend started successfully"
+        echo "Backend PID: $BACKEND_PID"
+        echo "Backend logs: tail -f backend.log"
+    else
+        print_error "Backend failed to start"
+        exit 1
+    fi
 }
 
 # Function to start frontend
 start_frontend() {
-    echo -e "${YELLOW}🎨 Starting React frontend...${NC}"
+    echo ""
+    print_info "Starting React frontend..."
     
     cd project_frontend/projectv2_v
     
-    # Start Vite development server
-    echo "Starting Vite dev server on http://localhost:3000"
-    echo "Press Ctrl+C to stop the frontend server"
-    echo ""
-    
-    npm run dev &
+    # Start frontend in background
+    nohup npm run dev > ../../frontend.log 2>&1 &
     FRONTEND_PID=$!
+    
+    # Save PID
+    echo $FRONTEND_PID > ../../frontend.pid
+    
+    # Wait for frontend to start
+    echo "Waiting for frontend to start..."
+    for i in {1..30}; do
+        if curl -s http://localhost:3000 > /dev/null 2>&1; then
+            break
+        fi
+        sleep 1
+    done
     
     cd ../..
     
-    # Wait a moment for frontend to start
-    sleep 3
-    
-    echo -e "${GREEN}✅ Frontend started successfully${NC}"
+    if [ -f "frontend.pid" ]; then
+        print_success "Frontend started successfully"
+        echo "Frontend PID: $FRONTEND_PID"
+        echo "Frontend logs: tail -f frontend.log"
+    else
+        print_error "Frontend failed to start"
+        exit 1
+    fi
 }
 
 # Function to show status
 show_status() {
     echo ""
-    echo -e "${BLUE}🌐 FinWise is now running locally!${NC}"
-    echo "======================================"
-    echo -e "${GREEN}✅ Backend: http://127.0.0.1:8000${NC}"
-    echo -e "${GREEN}✅ Frontend: http://localhost:3000${NC}"
-    echo -e "${GREEN}✅ Admin Panel: http://127.0.0.1:8000/admin${NC}"
+    print_info "FinWise is now running locally!"
     echo ""
-    echo -e "${YELLOW}📝 Important Notes:${NC}"
-    echo "1. Backend is running on port 8000"
-    echo "2. Frontend is running on port 3000"
-    echo "3. Make sure to update your Gemini API key in finwise_backend/.env"
-    echo "4. Both servers will continue running in the background"
+    echo "Access your application:"
+    echo "Backend: http://127.0.0.1:8000"
+    echo "Frontend: http://localhost:3000"
+    echo "Admin Panel: http://127.0.0.1:8000/admin"
     echo ""
-    echo -e "${BLUE}🛑 To stop the servers:${NC}"
-    echo "   kill $BACKEND_PID $FRONTEND_PID"
-    echo "   or close this terminal window"
+    echo "Logs:"
+    echo "Backend: tail -f backend.log"
+    echo "Frontend: tail -f frontend.log"
     echo ""
-    echo -e "${GREEN}🚀 Happy coding!${NC}"
+    echo "To stop servers: ./run_local.sh stop"
+    echo ""
+    print_success "Happy coding!"
 }
 
-# Function to cleanup on exit
+# Function to cleanup
 cleanup() {
     echo ""
-    echo -e "${YELLOW}🛑 Stopping servers...${NC}"
+    print_info "Cleaning up..."
     
-    if [ ! -z "$BACKEND_PID" ]; then
-        kill $BACKEND_PID 2>/dev/null || true
+    # Stop backend
+    if [ -f "backend.pid" ]; then
+        BACKEND_PID=$(cat backend.pid)
+        if kill -0 $BACKEND_PID 2>/dev/null; then
+            kill $BACKEND_PID
+            echo "Stopped backend process"
+        fi
+        rm -f backend.pid
     fi
     
-    if [ ! -z "$FRONTEND_PID" ]; then
-        kill $FRONTEND_PID 2>/dev/null || true
+    # Stop frontend
+    if [ -f "frontend.pid" ]; then
+        FRONTEND_PID=$(cat frontend.pid)
+        if kill -0 $FRONTEND_PID 2>/dev/null; then
+            kill $FRONTEND_PID
+            echo "Stopped frontend process"
+        fi
+        rm -f frontend.pid
     fi
     
-    echo -e "${GREEN}✅ Servers stopped${NC}"
-    exit 0
+    print_success "Servers stopped"
 }
 
-# Set trap to cleanup on script exit
-trap cleanup EXIT INT TERM
+# Function to show help
+show_help() {
+    echo "Usage: $0 [command]"
+    echo ""
+    echo "Commands:"
+    echo "  start   - Start FinWise locally (default)"
+    echo "  stop    - Stop all running servers"
+    echo "  status  - Show current status"
+    echo "  help    - Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  $0        # Start FinWise"
+    echo "  $0 stop   # Stop servers"
+    echo "  $0 status # Show status"
+}
 
 # Main execution
-main() {
-    check_prerequisites
-    setup_backend
-    setup_frontend
-    
-    echo ""
-    echo -e "${YELLOW}🚀 Starting FinWise locally...${NC}"
-    echo "This will start both backend and frontend servers"
-    echo "Press Ctrl+C to stop both servers"
-    echo ""
-    
-    start_backend
-    start_frontend
-    show_status
-    
-    # Keep the script running
-    echo -e "${YELLOW}⏳ Servers are running. Press Ctrl+C to stop...${NC}"
-    wait
-}
-
-# Run main function
-main "$@" 
+case "${1:-start}" in
+    start)
+        print_info "Starting FinWise locally..."
+        check_prerequisites
+        setup_backend
+        setup_frontend
+        start_backend
+        start_frontend
+        show_status
+        ;;
+    stop)
+        cleanup
+        ;;
+    status)
+        if [ -f "backend.pid" ] && [ -f "frontend.pid" ]; then
+            echo "FinWise is running:"
+            echo "Backend PID: $(cat backend.pid)"
+            echo "Frontend PID: $(cat frontend.pid)"
+        else
+            echo "FinWise is not running"
+        fi
+        ;;
+    help|--help|-h)
+        show_help
+        ;;
+    *)
+        print_error "Unknown command: $1"
+        show_help
+        exit 1
+        ;;
+esac 

@@ -52,7 +52,7 @@ function App() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 flex items-center justify-center">
         <div className="text-center">
-          <div className="text-red-600 mb-4 text-4xl">⚠️</div>
+          <div className="text-red-600 mb-4 text-4xl">Warning</div>
           <p className="text-gray-600 mb-4">Authentication Error</p>
           <p className="text-sm text-gray-500 mb-4">{error}</p>
           <button 

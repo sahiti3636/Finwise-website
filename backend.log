@@ -1,41 +1,15 @@
-Traceback (most recent call last):
-  File "/Users/sahitipotini/Desktop/finwise_project_completev1/finwise_backend/venv/bin/gunicorn", line 8, in <module>
-    sys.exit(run())
-             ~~~^^
-  File "/Users/sahitipotini/Desktop/finwise_project_completev1/finwise_backend/venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 66, in run
-    WSGIApplication("%(prog)s [OPTIONS] [APP_MODULE]", prog=prog).run()
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
-  File "/Users/sahitipotini/Desktop/finwise_project_completev1/finwise_backend/venv/lib/python3.13/site-packages/gunicorn/app/base.py", line 235, in run
-    super().run()
-    ~~~~~~~~~~~^^
-  File "/Users/sahitipotini/Desktop/finwise_project_completev1/finwise_backend/venv/lib/python3.13/site-packages/gunicorn/app/base.py", line 71, in run
-    Arbiter(self).run()
-    ~~~~~~~^^^^^^
-  File "/Users/sahitipotini/Desktop/finwise_project_completev1/finwise_backend/venv/lib/python3.13/site-packages/gunicorn/arbiter.py", line 57, in __init__
-    self.setup(app)
-    ~~~~~~~~~~^^^^^
-  File "/Users/sahitipotini/Desktop/finwise_project_completev1/finwise_backend/venv/lib/python3.13/site-packages/gunicorn/arbiter.py", line 117, in setup
-    self.app.wsgi()
-    ~~~~~~~~~~~~~^^
-  File "/Users/sahitipotini/Desktop/finwise_project_completev1/finwise_backend/venv/lib/python3.13/site-packages/gunicorn/app/base.py", line 66, in wsgi
-    self.callable = self.load()
-                    ~~~~~~~~~^^
-  File "/Users/sahitipotini/Desktop/finwise_project_completev1/finwise_backend/venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
-    return self.load_wsgiapp()
-           ~~~~~~~~~~~~~~~~~^^
-  File "/Users/sahitipotini/Desktop/finwise_project_completev1/finwise_backend/venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
-    return util.import_app(self.app_uri)
-           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
-  File "/Users/sahitipotini/Desktop/finwise_project_completev1/finwise_backend/venv/lib/python3.13/site-packages/gunicorn/util.py", line 370, in import_app
-    mod = importlib.import_module(module)
-  File "/opt/homebrew/Cellar/python@3.13/3.13.3_1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py", line 88, in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
-  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
-  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
-ModuleNotFoundError: No module named 'finwise_backend.wsgi_production'
-🏗️  FinWise Production Management
-========================================
-🚀 Starting Gunicorn server...
-❌ Error starting Gunicorn: Command '['gunicorn', '--config', 'gunicorn.conf.py', 'finwise_backend.wsgi_production:application']' returned non-zero exit status 1.
+Watching for file changes with StatReloader
+Not Found: /api/health/
+[17/Aug/2025 05:32:05] "GET /api/health/ HTTP/1.1" 404 6527
+[17/Aug/2025 05:32:58] "OPTIONS /api/token/ HTTP/1.1" 200 0
+[17/Aug/2025 05:32:58] "POST /api/token/ HTTP/1.1" 200 489
+[17/Aug/2025 05:32:58] "OPTIONS /api/user/ HTTP/1.1" 200 0
+[17/Aug/2025 05:32:58] "GET /api/user/ HTTP/1.1" 200 96
+[17/Aug/2025 05:32:58] "OPTIONS /api/dashboard/ HTTP/1.1" 200 0
+[17/Aug/2025 05:32:58] "OPTIONS /api/dashboard/ HTTP/1.1" 200 0
+[17/Aug/2025 05:32:58] "GET /api/dashboard/ HTTP/1.1" 200 413
+[17/Aug/2025 05:32:58] "GET /api/dashboard/ HTTP/1.1" 200 413
+[17/Aug/2025 05:32:58] "OPTIONS /api/tax-savings/ HTTP/1.1" 200 0
+[17/Aug/2025 05:32:58] "OPTIONS /api/tax-savings/ HTTP/1.1" 200 0
+[17/Aug/2025 05:33:04] "GET /api/tax-savings/ HTTP/1.1" 200 2612
+[17/Aug/2025 05:33:04] "GET /api/tax-savings/ HTTP/1.1" 200 2650
